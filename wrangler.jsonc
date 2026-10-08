@@ -9,7 +9,7 @@
 	"compatibility_date": "2026-10-01",
 	"vars": {
 		"AIRTABLE_BASE_ID": "app1dVtQEFtl6nPGf",
-		"AIRTABLE_TABLE_NAME": "Form Submissions"
+		"AIRTABLE_TABLE_NAME": "Cloudflare-form"
 	},
 	"observability": {
 		"enabled": true
