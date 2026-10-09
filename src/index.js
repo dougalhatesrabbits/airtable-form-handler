@@ -92,7 +92,7 @@ async function createAirtableRecord(env, body) {
 				body: JSON.stringify(body),
 				headers: {
 					Authorization: `Bearer ${env.AIRTABLE_ACCESS_TOKEN}`,
-					"Content-Type": "application/json",
+					"Content-Type": `application/json`,
 				},
 			},
 		);
