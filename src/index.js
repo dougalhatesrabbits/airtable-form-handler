@@ -63,7 +63,11 @@ async function submitHandler(request, env) {
   	if (result && result.ok) {
     	return new Response("Success", { status: 200 });
   	}
-  	return new Response("Error creating record", { status: 500 });
+	const errorText = await result.text();
+	console.error("Airtable API error:", result.status, errorText);
+	return new Response(`Error creating record: ${result.status} ${errorText}`, { status: 500 });
+
+  	//return new Response("Error creating record", { status: 500 });
 	//await createAirtableRecord(env, reqBody);
 }
 
