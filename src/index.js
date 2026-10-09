@@ -11,11 +11,11 @@
 /**
  * @typedef {Object} Env
  * @property {Workflow} MY_WORKFLOW
- */
+ **/
 
 async function createAirtableRecord(env, body) {
 	try {
-		const result = fetch(
+		const result = await fetch(
 			`https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${encodeURIComponent(env.AIRTABLE_TABLE_NAME)}`,
 			{
 				method: "POST",
