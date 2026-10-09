@@ -21,7 +21,7 @@ async function createAirtableRecord(env, body) {
 				method: "POST",
 				body: JSON.stringify(body),
 				headers: {
-					Authorization: `Bearer ${env.AIRTABLE_ACCESS_TOKEN}`,
+					Authorization: `Bearer ${env.argus}`,
 					"Content-Type": `application/json`,
 				},
 			},
