@@ -29,18 +29,21 @@ async function createAirtableRecord(env, body) {
 		return result;
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 }
 
 async function submitHandler(request, env) {
 	if (request.method !== "POST") {
-		return new Response("Method Not Allowed", {
-			status: 405,
-		});
+		return new Response("Method Not Allowed", { status: 405 });
 	}
 	const body = await request.formData();
-
-	const { first_name, last_name, email, phone, subject, message } =
+	const { first_name, 
+		    last_name, 
+			email, 
+			phone, 
+			subject, 
+			message } =
 		Object.fromEntries(body);
 
 	// The keys in "fields" are case-sensitive, and
@@ -56,14 +59,19 @@ async function submitHandler(request, env) {
 			Message: message,
 		},
 	};
-	await createAirtableRecord(env, reqBody);
+	const result = await createAirtableRecord(env, reqBody);
+  	if (result && result.ok) {
+    	return new Response("Success", { status: 200 });
+  	}
+  	return new Response("Error creating record", { status: 500 });
+	//await createAirtableRecord(env, reqBody);
 }
 
 export default {
 	async fetch(request, env) {
 		const url = new URL(request.url);
 		if (url.pathname === "/submit") {
-			await submitHandler(request, env);
+			return await submitHandler(request, env);
 		}
 		return new Response("Not found", { status: 404 });
 	},
